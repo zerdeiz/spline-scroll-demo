@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spline Scroll Demo</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #cde8ff;
+      overflow-x: hidden;
+    }
+
+    .stage {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+
+      /* iOS: erlaubt echtes Page Scroll Wischen */
+      touch-action: pan-y;
+    }
+
+    spline-viewer {
+      width: 100%;
+      height: 100%;
+      display: block;
+
+      /* iOS: erlaubt echtes Page Scroll Wischen */
+      touch-action: pan-y;
+    }
+
+    /* muss deutlich größer sein als End After */
+    .spacer {
+      height: 2000px;
+      width: 1px;
+    }
+  </style>
+
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.38/build/spline-viewer.js"></script>
+</head>
+
+<body>
+  <div class="stage">
+    <spline-viewer url="https://prod.spline.design/EAQ052PWAKwqlfR7/scene.splinecode"></spline-viewer>
+  </div>
+
+  <div class="spacer" aria-hidden="true"></div>
+
+  <script>
+    // verhindert Start im falschen Scrollstand (Safari restore)
+    window.addEventListener("pageshow", () => window.scrollTo(0, 0));
+  </script>
+</body>
+</html>
