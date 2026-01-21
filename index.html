@@ -13,15 +13,14 @@
       overflow-x: hidden;
     }
 
+    /* Viewer bleibt immer sichtbar */
     .stage {
-      position: sticky;
-      top: 0;
-      height: 100vh;
+      position: fixed;
+      inset: 0;
       width: 100%;
+      height: 100vh;
       overflow: hidden;
-
-      /* iOS: erlaubt echtes Page Scroll Wischen */
-      touch-action: pan-y;
+      z-index: 1;
     }
 
     spline-viewer {
@@ -29,14 +28,16 @@
       height: 100%;
       display: block;
 
-      /* iOS: erlaubt echtes Page Scroll Wischen */
+      /* wichtig für iOS, damit Wischen trotzdem Page Scroll auslöst */
       touch-action: pan-y;
     }
 
-    /* muss deutlich größer sein als End After */
+    /* Scroll Strecke, steuert deine Spline Scroll Events */
     .spacer {
-      height: 2000px;
+      height: 2200px;
       width: 1px;
+      position: relative;
+      z-index: 0;
     }
   </style>
 
@@ -51,8 +52,9 @@
   <div class="spacer" aria-hidden="true"></div>
 
   <script>
-    // verhindert Start im falschen Scrollstand (Safari restore)
-    window.addEventListener("pageshow", () => window.scrollTo(0, 0));
+    window.addEventListener("pageshow", () => {
+      window.scrollTo(0, 0);
+    });
   </script>
 </body>
 </html>
